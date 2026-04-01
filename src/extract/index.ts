@@ -11,8 +11,8 @@ import type {
 const git = simpleGit();
 
 // Use a delimiter unlikely to appear in commit messages
-const COMMIT_SEP = "---PBJ_COMMIT_SEP---";
-const FIELD_SEP = "---PBJ_FIELD---";
+const COMMIT_SEP = "---GITLORE_COMMIT_SEP---";
+const FIELD_SEP = "---GITLORE_FIELD---";
 
 export async function extractHistory(
   options: ExtractOptions

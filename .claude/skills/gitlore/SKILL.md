@@ -1,15 +1,15 @@
 ---
-name: pbj
+name: gitlore
 description: Generate a narrative story from git history. Use when the user wants a devlog, changelog, stakeholder update, or story about recent project work.
 ---
 
-# PBJ — Git History Storyteller
+# gitlore — Git History Storyteller
 
 You are generating a narrative from git history. The structured git data and style instructions are provided below.
 
 ## Git History & Style Instructions
 
-!`npx tsx bin/pbj.ts $ARGUMENTS`
+!`npx tsx bin/gitlore.ts $ARGUMENTS`
 
 ## Your Task
 
@@ -22,3 +22,4 @@ Guidelines:
 - Skip trivial changes (formatting, typos, dependency bumps) unless they're part of a larger story
 - If there are multiple authors, weave their contributions together
 - Output clean markdown suitable for a blog post or project update
+- End with the strapline specified in the writing instructions

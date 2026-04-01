@@ -1,20 +1,25 @@
 {
-  "name": "pbj",
+  "name": "gitlore",
   "version": "0.1.0",
-  "description": "Generate engaging narratives from git history",
+  "description": "Turn git history into engaging narratives, devlogs, and stories",
   "type": "module",
   "bin": {
-    "pbj": "./dist/bin/pbj.js"
+    "gitlore": "./dist/bin/gitlore.js"
   },
   "scripts": {
     "build": "tsup",
-    "dev": "tsx bin/pbj.ts",
+    "dev": "tsx bin/gitlore.ts",
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "tsc --noEmit"
   },
-  "keywords": ["git", "changelog", "narrative", "devlog", "storytelling"],
+  "keywords": ["git", "changelog", "narrative", "devlog", "storytelling", "blog", "history"],
+  "author": "Graham Carle",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carlgra/gitlore"
+  },
   "engines": {
     "node": ">=20"
   },

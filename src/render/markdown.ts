@@ -2,7 +2,8 @@ import type { GitHistory } from "../extract/types.js";
 
 export function renderMarkdown(
   narrative: string,
-  history: GitHistory
+  history: GitHistory,
+  strapline?: string
 ): string {
   const parts: string[] = [];
 
@@ -20,6 +21,12 @@ export function renderMarkdown(
   // The narrative itself
   parts.push(narrative);
   parts.push("");
+
+  // Strapline
+  if (strapline) {
+    parts.push(`*${strapline}*`);
+    parts.push("");
+  }
 
   return parts.join("\n");
 }

@@ -4,8 +4,8 @@ import { generate } from "./commands/generate.js";
 const program = new Command();
 
 program
-  .name("pbj")
-  .description("Generate engaging narratives from git history")
+  .name("gitlore")
+  .description("Turn git history into engaging narratives and stories")
   .version("0.1.0");
 
 program

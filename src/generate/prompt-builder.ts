@@ -10,6 +10,7 @@ export interface PromptOptions {
 export interface BuiltPrompt {
   system: string;
   user: string;
+  strapline: string;
 }
 
 export function buildPrompt(
@@ -28,12 +29,12 @@ export function buildPrompt(
   }
 
   // User prompt with structured data
-  const user = buildUserPrompt(history);
+  const user = buildUserPrompt(history, style.strapline);
 
-  return { system, user };
+  return { system, user, strapline: style.strapline };
 }
 
-function buildUserPrompt(history: GitHistory): string {
+function buildUserPrompt(history: GitHistory, strapline: string): string {
   const { repoName, commits, stats, dateRange } = history;
 
   const parts: string[] = [];
@@ -116,6 +117,9 @@ function buildUserPrompt(history: GitHistory): string {
   parts.push(`- Structure the output with markdown headers and sections`);
   parts.push(
     `- If the history tells a clear story arc (problem → solution, or iterative refinement), highlight that`
+  );
+  parts.push(
+    `- End the narrative with this strapline on its own line, in italics: *${strapline}*`
   );
 
   return parts.join("\n");

@@ -91,7 +91,7 @@ export async function generate(options: GenerateOptions) {
     }
 
     // Stage 4: Render
-    const output = renderMarkdown(narrative, history);
+    const output = renderMarkdown(narrative, history, prompt.strapline);
 
     if (options.out) {
       await writeFile(options.out, output, "utf-8");
