@@ -1,0 +1,37 @@
+{
+  "name": "pbj",
+  "version": "0.1.0",
+  "description": "Generate engaging narratives from git history",
+  "type": "module",
+  "bin": {
+    "pbj": "./dist/bin/pbj.js"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsx bin/pbj.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "tsc --noEmit"
+  },
+  "keywords": ["git", "changelog", "narrative", "devlog", "storytelling"],
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "chalk": "^5.4.1",
+    "commander": "^13.1.0",
+    "date-fns": "^4.1.0",
+    "ora": "^8.2.0",
+    "simple-git": "^3.27.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.0",
+    "tsup": "^8.4.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  }
+}
