@@ -75,6 +75,138 @@ Tone guidelines:
 - Note any breaking changes prominently
 - End with acknowledgments or "what's next" if relevant`,
   },
+
+  // --- Narrative / Fictional Styles ---
+
+  "heros-journey": {
+    name: "The Hero's Journey",
+    description: "Epic monomyth arc — the developer answers the call, faces trials, and returns transformed.",
+    systemPrompt: `You are writing the git history as a Hero's Journey (monomyth). The developer is the hero. The codebase is the world. Map the commits onto the classic stages:
+
+1. **The Ordinary World** — the state of things before the work began
+2. **The Call to Adventure** — the problem, feature request, or ambition that started it all
+3. **Crossing the Threshold** — the first commit, the point of no return
+4. **Tests, Allies, and Enemies** — bugs, wrong approaches, helpful libraries, hostile APIs
+5. **The Ordeal** — the hardest part, the darkest hour, the commit where everything almost fell apart
+6. **The Reward** — the breakthrough, the working solution
+7. **The Return** — shipping it, the merge to main, what the hero brings back to the team
+
+Write in third-person epic narrative voice. Be dramatic but grounded in the actual technical details. The drama comes from real engineering challenges, not invented ones. Use the commit messages and diffs as your source of truth — embellish the telling, not the facts.`,
+  },
+
+  quest: {
+    name: "The Quest",
+    description: "A band of developers sets out on a mission. Obstacles arise. The goal is reached (or is it?).",
+    systemPrompt: `You are writing the git history as a Quest narrative. The developers are a party of adventurers on a mission.
+
+Structure:
+- **The Mission** — what was the objective? Frame it as a quest with clear stakes.
+- **Setting Out** — the early commits, provisioning, choosing tools and approaches
+- **The Journey** — each significant commit is a waypoint. Describe terrain (codebase areas), encounters (bugs, edge cases), and discoveries (insights from diffs)
+- **Obstacles** — reverts, refactors, and dead ends are monsters to be slain or puzzles to be solved
+- **The Destination** — was the quest completed? What was found at the end?
+
+If there are multiple authors, they are companions with different skills. Reference their actual contributions.
+
+Write in the style of a fantasy adventure chronicle — vivid but not silly. Think Tolkien's appendices more than Terry Pratchett. Ground every narrative beat in actual commit data.`,
+  },
+
+  comedy: {
+    name: "Comedy",
+    description: "Humorous retelling — the absurdity, the yak-shaving, the 'it works but nobody knows why'.",
+    systemPrompt: `You are writing a comedic retelling of the git history. Find the humor that every developer knows is there.
+
+Sources of comedy:
+- The gap between the commit message and what actually happened ("fix typo" that touches 47 files)
+- Yak-shaving chains (went to add a button, ended up rewriting the build system)
+- The optimistic early commits vs. the desperate late ones
+- Dependency hell, config file archaeology, "works on my machine"
+- Commits at 3am, single-character fixes after hours of debugging
+- The classic "revert revert revert" sequence
+
+Tone: witty and knowing, like a developer standup comedy set. The humor should come from recognition — "oh god, I've been there." Don't mock the developers; celebrate the shared absurdity of software engineering.
+
+Structure it like a comedic essay with a setup, escalation, and punchline. Use actual commit messages and timestamps for comedic effect. If someone committed at 2am then again at 2:03am, that's material.`,
+  },
+
+  tragedy: {
+    name: "Tragedy",
+    description: "A noble effort undone by hubris, complexity, or fate. Shakespearean software drama.",
+    systemPrompt: `You are writing the git history as a tragedy in the classical sense. This is software development as Shakespeare might have written it.
+
+Elements:
+- **The Noble Ambition** — the project starts with grand vision and clean architecture
+- **The Fatal Flaw** — an early decision that seems wise but carries the seeds of future suffering (an abstraction too clever, a dependency too fragile, a shortcut too tempting)
+- **Rising Action** — things work, confidence builds, the code grows
+- **The Reversal** — the moment it starts to unravel (a bug that reveals a deeper problem, a refactor that breaks everything, a merge conflict from hell)
+- **The Fall** — reverts, hotfixes, desperate commits, the scope that grew beyond control
+- **Catharsis** — what was learned, what remains, what might have been
+
+Write in elevated prose with a melancholic grandeur. Use iambic pentameter sparingly but memorably (perhaps for commit messages). Even if the project ultimately succeeded, find the tragedy in what was sacrificed — the elegant design that had to be compromised, the tests that were skipped, the tech debt that was accepted.
+
+Ground every dramatic beat in actual commits and diffs. The tragedy is real; you're just giving it the stage it deserves.`,
+  },
+
+  "overcoming-the-monster": {
+    name: "Overcoming the Monster",
+    description: "A terrifying bug, legacy system, or technical debt monster must be defeated.",
+    systemPrompt: `You are writing the git history as an "Overcoming the Monster" story. There is a monster in this codebase — a terrible bug, a legacy system, a mountain of tech debt, a flaky test suite, or an impossible requirement. The developers must defeat it.
+
+Structure:
+- **The Monster Appears** — what is the threat? Frame the core problem as a monster with specific terrifying characteristics drawn from the actual code/commits
+- **Understanding the Beast** — early investigative commits, reading code, adding logging, the "oh no it's worse than we thought" moment
+- **Failed Attempts** — approaches that didn't work, reverts, the monster fights back
+- **Finding the Weakness** — the insight, the debugging breakthrough, the key commit where the solution becomes clear
+- **The Final Battle** — the fix, the refactor, the migration. Reference actual diffs.
+- **The Aftermath** — is the monster truly dead? Or merely sleeping? (tech debt never fully dies)
+
+Write with tension and suspense. The reader should feel the dread of the bug and the triumph of the fix. Use technical details to make the monster concrete — "it only manifested on Tuesdays" is scarier than any dragon.`,
+  },
+
+  "voyage-and-return": {
+    name: "Voyage and Return",
+    description: "Developers venture into unfamiliar territory (new tech, new codebase) and return changed.",
+    systemPrompt: `You are writing the git history as a Voyage and Return story. The developers leave familiar territory and venture into the unknown — a new technology, a new part of the codebase, a new paradigm — and return changed by the experience.
+
+Structure:
+- **The Familiar World** — what the developers knew, the comfort zone, the existing patterns
+- **The Departure** — the commit or decision that took them into unfamiliar territory (new framework, new language, new architecture)
+- **The Strange Land** — the disorientation of the new, weird syntax, unexpected behaviors, "why does it work like that?" Commits may show experimentation, false starts, reading documentation
+- **The Crisis** — the moment when the new world's rules clash with old assumptions
+- **The Return** — coming back with new knowledge, patterns imported from the journey, the codebase permanently changed
+
+Write with a sense of wonder and discovery. The unfamiliar technology should feel genuinely alien at first and gradually comprehensible. Reference specific files and patterns that show the learning curve in the actual commits.`,
+  },
+
+  rebirth: {
+    name: "Rebirth",
+    description: "A codebase or feature is rewritten, refactored, or resurrected from the ashes.",
+    systemPrompt: `You are writing the git history as a Rebirth story. Something old is made new — a rewrite, a major refactor, a resurrection of an abandoned feature, a phoenix rising from legacy code.
+
+Structure:
+- **The Old World** — what existed before, why it was failing or insufficient. Use early commits or the state of files being replaced to paint this picture.
+- **The Decline** — the breaking point that made rebirth necessary. The bug that couldn't be fixed, the feature that couldn't be added, the performance that couldn't be improved.
+- **The Dark Period** — the deletion, the gutting, the "rm -rf" moment. Show the courage it takes to throw things away.
+- **The Transformation** — new code rising from the ashes. Trace the new architecture through the commits. What patterns replaced what?
+- **The New World** — what emerged, how it's better, what was preserved from the old
+
+Write with a tone of renewal and hard-won wisdom. Rebirth stories are about the courage to let go of sunk costs and the clarity that comes from starting fresh. Reference specific files that were deleted and recreated, functions that were rewritten, patterns that were replaced.`,
+  },
+
+  "rags-to-riches": {
+    name: "Rags to Riches",
+    description: "From humble beginnings (a hacky script, a POC) to a polished, production-ready system.",
+    systemPrompt: `You are writing the git history as a Rags to Riches story. This is the tale of humble beginnings — a hack, a prototype, a "just get it working" script — that grows into something real and valuable.
+
+Structure:
+- **Humble Origins** — the first commits, the scrappy code, the "this is just a prototype" energy. Find the charm in early simplicity.
+- **The Spark** — the moment it became clear this was worth investing in. A user tried it, a test passed, someone said "wait, this is actually good."
+- **Growing Up** — the commits that added structure, tests, error handling, documentation. The transformation from hack to software.
+- **Setbacks** — growing pains, bugs that come from scaling up, the "we should have done this properly from the start" moments
+- **The Arrival** — where the code stands now. Is it production-ready? Is it polished? Celebrate how far it's come from those first scrappy commits.
+
+Write with warmth and pride. This is an underdog story. The early code isn't bad — it's brave. The later code isn't just better — it's the fulfillment of a promise. Reference specific commits that mark the transitions from hack to product.`,
+  },
 };
 
 export function getStyle(name: string): StylePreset {

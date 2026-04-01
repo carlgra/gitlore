@@ -19,7 +19,7 @@ export interface GenerateOptions {
   model: string;
   maxTokens: string;
   stream?: boolean;
-  dryRun?: boolean;
+  api?: boolean;
   merges: boolean;
   verbose?: boolean;
 }
@@ -28,11 +28,10 @@ export async function generate(options: GenerateOptions) {
   const spinner = ora();
 
   try {
-    // Default to 1 week ago if no date specified
     const since = options.since ?? "1 week ago";
 
     if (options.verbose) {
-      console.log(chalk.dim("Options:"), options);
+      console.error(chalk.dim("Options:"), options);
     }
 
     // Stage 1: Extract
@@ -50,7 +49,7 @@ export async function generate(options: GenerateOptions) {
     );
 
     if (history.commits.length === 0) {
-      console.log(chalk.yellow("No commits found in the specified range."));
+      console.error(chalk.yellow("No commits found in the specified range."));
       return;
     }
 
@@ -61,15 +60,16 @@ export async function generate(options: GenerateOptions) {
       audience: options.audience,
     });
 
-    if (options.dryRun) {
-      console.log(chalk.dim("\n--- DRY RUN: Prompt that would be sent ---\n"));
+    // Default mode: output the prompt for use with an LLM (e.g. Claude Code skill)
+    if (!options.api) {
+      // Send status to stderr so stdout is clean prompt output
       console.log(prompt.system);
       console.log("\n---\n");
       console.log(prompt.user);
       return;
     }
 
-    // Stage 3: Generate
+    // API mode: call Claude directly
     spinner.start("Generating narrative...");
     const narrative = await generateNarrative(prompt, {
       model: options.model,
