@@ -5,7 +5,7 @@ Turn your git history into engaging narratives, devlogs, and stories.
 gitlore reads your commits, diffs, and file stats, then assembles a structured prompt that any LLM can turn into a compelling narrative. Choose from 13 styles — from technical deep-dives to epic hero's journeys to comedic retellings.
 
 ```bash
-npx gitlore --since "1 month ago" --style comedy
+gitlore --since "1 month ago" --style comedy
 ```
 
 ## How It Works
@@ -13,21 +13,29 @@ npx gitlore --since "1 month ago" --style comedy
 gitlore is a **prompt builder**, not an LLM wrapper. It extracts structured data from your git history and outputs a prompt designed for narrative generation.
 
 Use it with:
-- **Claude Code** as a `/gitlore` skill — the narrative is generated right in your conversation
+- **Claude Code** as a `/gitlore` slash command — the narrative is generated right in your conversation
 - **Any LLM** — copy the output into ChatGPT, Claude, or whatever you use
 - **Direct API** — pass `--api` with an `ANTHROPIC_API_KEY` for standalone generation
 
 ## Install
 
-```bash
-npm install -g gitlore
-```
-
-Or run directly:
+gitlore is not yet published to npm. For now, install from source:
 
 ```bash
-npx gitlore --since "2 weeks ago" --style devlog
+git clone https://github.com/carlgra/gitlore.git
+cd gitlore
+npm install
+npm run build
+npm link         # makes `gitlore` available globally
 ```
+
+Then from any git repo:
+
+```bash
+gitlore --since "2 weeks ago" --style devlog
+```
+
+To uninstall later: `npm unlink -g gitlore`.
 
 ## Styles
 
@@ -103,13 +111,29 @@ Options:
 
 ## Claude Code Skill
 
-Clone this repo and gitlore works as a `/gitlore` slash command in Claude Code:
+gitlore ships with a Claude Code skill so you can run it as a `/gitlore` slash command.
+
+**Install the skill** — copy the skill folder into your Claude Code skills directory:
+
+```bash
+# User-level (available in every project)
+mkdir -p ~/.claude/skills
+cp -r .claude/skills/gitlore ~/.claude/skills/
+
+# Or project-level (only in the current repo)
+mkdir -p .claude/skills
+cp -r <path-to-gitlore>/.claude/skills/gitlore .claude/skills/
+```
+
+The skill runs `npx tsx bin/gitlore.ts`, so it expects to be invoked from inside a checkout of this repo (or any repo where `gitlore` is installed as a dependency). If you installed gitlore globally via `npm link` above, you can edit `~/.claude/skills/gitlore/SKILL.md` to call `gitlore $ARGUMENTS` directly instead.
+
+**Use it:**
 
 ```
 /gitlore --since "1 week ago" --style comedy
 ```
 
-The skill extracts git history, builds the prompt, and Claude generates the narrative right in your conversation.
+Claude extracts the git history, builds the prompt, and writes the narrative right in your conversation.
 
 ## Contributing
 
