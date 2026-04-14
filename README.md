@@ -117,31 +117,61 @@ Options:
   --verbose             Debug output
 ```
 
-## Claude Code Skill
+## Using gitlore with your AI tool
+
+gitlore is a CLI that emits a structured prompt. Any LLM or AI coding tool can take it from there — the integration is just "run the command, feed the output to the model".
+
+### Claude Code (recommended — tightest integration)
 
 gitlore ships with a Claude Code skill so you can run it as a `/gitlore` slash command.
 
-**Install the skill** — copy the skill folder into your Claude Code skills directory:
+Install the skill once, user-level so it works in every repo:
 
 ```bash
-# User-level (available in every project)
 mkdir -p ~/.claude/skills
-cp -r .claude/skills/gitlore ~/.claude/skills/
-
-# Or project-level (only in the current repo)
-mkdir -p .claude/skills
-cp -r <path-to-gitlore>/.claude/skills/gitlore .claude/skills/
+cp -r <path-to-gitlore-checkout>/.claude/skills/gitlore ~/.claude/skills/
 ```
 
-The skill runs `npx tsx bin/gitlore.ts`, so it expects to be invoked from inside a checkout of this repo (or any repo where `gitlore` is installed as a dependency). If you installed gitlore globally via `npm link` above, you can edit `~/.claude/skills/gitlore/SKILL.md` to call `gitlore $ARGUMENTS` directly instead.
-
-**Use it:**
+Then, in any Claude Code session inside a git repo:
 
 ```
 /gitlore --since "1 week ago" --style comedy
 ```
 
-Claude extracts the git history, builds the prompt, and writes the narrative right in your conversation.
+Claude runs the CLI, reads its output, and writes the narrative directly into your conversation.
+
+The skill calls `npx @carlgra/gitlore $ARGUMENTS` by default. If you installed from source via `npm link`, edit `~/.claude/skills/gitlore/SKILL.md` to call `gitlore $ARGUMENTS` directly and skip the npx fetch.
+
+### Windsurf, Cursor, or any AI IDE with a terminal
+
+These don't have a skill system, so use gitlore as a regular CLI and hand the output to the AI panel.
+
+```bash
+npx @carlgra/gitlore --since "1 week ago" --style comedy > gitlore-prompt.txt
+```
+
+Then in the AI chat panel, attach `gitlore-prompt.txt` (or paste its contents) and say something like *"follow this prompt and write the narrative"*. The AI follows the system prompt baked into the output and writes the story.
+
+### ChatGPT, Claude.ai, or any web chat UI
+
+```bash
+npx @carlgra/gitlore --since "1 week ago" --style comedy | pbcopy
+```
+
+(Use `xclip -selection clipboard` on Linux, or just `> gitlore-prompt.txt` and open the file.)
+
+Paste into the chat. The model does the rest.
+
+### Direct API (no chat UI at all)
+
+If you just want the narrative printed to your terminal:
+
+```bash
+export ANTHROPIC_API_KEY=sk-ant-...
+npx @carlgra/gitlore --since "1 week ago" --style comedy --api
+```
+
+The `--api` flag sends the prompt to Claude and prints the narrative directly — useful for scripts, CI jobs, and weekly-digest emails.
 
 ## Contributing
 

@@ -9,7 +9,7 @@ You are generating a narrative from git history. The structured git data and sty
 
 ## Git History & Style Instructions
 
-!`npx tsx bin/gitlore.ts $ARGUMENTS`
+!`npx @carlgra/gitlore $ARGUMENTS`
 
 ## Your Task
 
