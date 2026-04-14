@@ -1,17 +1,23 @@
 {
-  "name": "gitlore",
+  "name": "@carlgra/gitlore",
   "version": "0.1.0",
   "description": "Turn git history into engaging narratives, devlogs, and stories",
   "type": "module",
   "bin": {
     "gitlore": "./dist/bin/gitlore.js"
   },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsx bin/gitlore.ts",
     "test": "vitest run",
     "test:watch": "vitest",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
   },
   "keywords": ["git", "changelog", "narrative", "devlog", "storytelling", "blog", "history"],
   "author": "Graham Carle",

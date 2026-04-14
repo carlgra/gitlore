@@ -19,7 +19,23 @@ Use it with:
 
 ## Install
 
-gitlore is not yet published to npm. For now, install from source:
+```bash
+npm install -g @carlgra/gitlore
+```
+
+Or run without installing:
+
+```bash
+npx @carlgra/gitlore --since "2 weeks ago" --style devlog
+```
+
+Once installed globally, the command is just `gitlore`:
+
+```bash
+gitlore --since "2 weeks ago" --style devlog
+```
+
+### From source
 
 ```bash
 git clone https://github.com/carlgra/gitlore.git
@@ -28,14 +44,6 @@ npm install
 npm run build
 npm link         # makes `gitlore` available globally
 ```
-
-Then from any git repo:
-
-```bash
-gitlore --since "2 weeks ago" --style devlog
-```
-
-To uninstall later: `npm unlink -g gitlore`.
 
 ## Styles
 
