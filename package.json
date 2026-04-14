@@ -4,7 +4,7 @@
   "description": "Turn git history into engaging narratives, devlogs, and stories",
   "type": "module",
   "bin": {
-    "gitlore": "./dist/bin/gitlore.js"
+    "gitlore": "dist/bin/gitlore.js"
   },
   "files": [
     "dist",
@@ -19,12 +19,20 @@
     "lint": "tsc --noEmit",
     "prepublishOnly": "npm run build"
   },
-  "keywords": ["git", "changelog", "narrative", "devlog", "storytelling", "blog", "history"],
+  "keywords": [
+    "git",
+    "changelog",
+    "narrative",
+    "devlog",
+    "storytelling",
+    "blog",
+    "history"
+  ],
   "author": "Graham Carle",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/carlgra/gitlore"
+    "url": "git+https://github.com/carlgra/gitlore.git"
   },
   "engines": {
     "node": ">=20"
